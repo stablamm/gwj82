@@ -6,6 +6,7 @@ public partial class SignalManager : Node
 {
     public static SignalManager Instance;
 
+    [Signal] public delegate void Spawn_Sandcastle_EventHandler(Vector2 position);
     [Signal] public delegate void SpawnLandmineEventHandler(Vector2I position);
     [Signal] public delegate void LandmineExplodeEventHandler(Vector2I position);
     [Signal] public delegate void SpawnGhostEventHandler(Vector2I position);
@@ -32,6 +33,7 @@ public partial class SignalManager : Node
     {
         Instance = this;
 
+        AddUserSignal(nameof(Spawn_Sandcastle_EventHandler));
         AddUserSignal(nameof(SpawnLandmineEventHandler));
         AddUserSignal(nameof(LandmineExplodeEventHandler));
         AddUserSignal(nameof(SpawnGhostEventHandler));
@@ -55,6 +57,7 @@ public partial class SignalManager : Node
         AddUserSignal(nameof(BeachAreaSpawn_UmbrellaSpawn_EventHandler));
     }
 
+    public void EmitSpawnSandcastle(Vector2 position) => EmitSignal(nameof(Spawn_Sandcastle_EventHandler), position);
     public void EmitSpawnLandmine(Vector2I position) => EmitSignal(nameof(SpawnLandmineEventHandler), position);
     public void EmitLandmineExplode(Vector2I position) => EmitSignal(nameof(LandmineExplodeEventHandler), position);
     public void EmitSpawnGhost(Vector2I position) => EmitSignal(nameof(SpawnGhostEventHandler), position);

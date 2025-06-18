@@ -6,6 +6,14 @@ namespace GWJ.Scenes.Worlds;
 
 public partial class TestWorld : Node2D
 {
+    private PackedScene packedCrater = GD.Load<PackedScene>("res://Scenes/Entities/crater.tscn");
+    private PackedScene packedGhost = GD.Load<PackedScene>("res://Scenes/Entities/ghost.tscn");
+    private PackedScene packedLandmine = GD.Load<PackedScene>("res://Scenes/Entities/landmine.tscn");
+    private PackedScene packedGoodGuy = GD.Load<PackedScene>("res://Scenes/Entities/good_guy.tscn");
+    private PackedScene packedBeachGoer = GD.Load<PackedScene>("res://Scenes/Entities/beach_goer.tscn");
+    private PackedScene packedUmbrella = GD.Load<PackedScene>("res://Scenes/Entities/beach_umbrella.tscn");
+    private PackedScene packedSandcastle = GD.Load<PackedScene>("res://Scenes/Entities/sandcastle.tscn");
+
     private Node2D Entities;
 
     public override void _Ready()
@@ -35,6 +43,10 @@ public partial class TestWorld : Node2D
         SignalManager.Instance.Connect(
             nameof(SignalManager.BeachAreaSpawn_UmbrellaSpawn_EventHandler)
             , new Callable(this, nameof(OnUmbrellaSpawn)));
+
+        SignalManager.Instance.Connect(
+            nameof(SignalManager.Spawn_Sandcastle_EventHandler)
+            , new Callable(this, nameof(OnSpawnSandcastle)));
     }
 
     public override void _Input(InputEvent @event)
@@ -52,10 +64,8 @@ public partial class TestWorld : Node2D
     private void OnLandmineExplode(Vector2I position)
     {
         GD.Print($"Landmine exploded at position: {position}");
-
-        var packedCrater = GD.Load<PackedScene>("res://Scenes/Entities/crater.tscn");
-        var unpackedCrater = packedCrater.Instantiate<Crater>();
         
+        var unpackedCrater = packedCrater.Instantiate<Crater>();
         unpackedCrater.GlobalPosition = position;
         
         AddChild(unpackedCrater);
@@ -65,9 +75,7 @@ public partial class TestWorld : Node2D
     {
         GD.Print($"Ghost spawned at position: {position}");
         
-        var packedGhost = GD.Load<PackedScene>("res://Scenes/Entities/ghost.tscn");
         var unpackedGhost = packedGhost.Instantiate<Ghost>();
-        
         unpackedGhost.GlobalPosition = position;
         
         AddChild(unpackedGhost);
@@ -76,10 +84,8 @@ public partial class TestWorld : Node2D
     private void OnSpawnLandmine(Vector2I position)
     {
         GD.Print($"Landmine spawned at position: {position}");
-        
-        var packedLandmine = GD.Load<PackedScene>("res://Scenes/Entities/landmine.tscn");
+       
         var unpackedLandmine = packedLandmine.Instantiate<Landmine>();
-        
         unpackedLandmine.GlobalPosition = position;
         
         AddChild(unpackedLandmine);
@@ -88,10 +94,8 @@ public partial class TestWorld : Node2D
     private void OnGoodGuySpawn(Vector2 position)
     {
         GD.Print($"GoodGuy spawned at position: {position}");
-        
-        var packedGoodGuy = GD.Load<PackedScene>("res://Scenes/Entities/good_guy.tscn");
+
         var unpackedGoodGuy = packedGoodGuy.Instantiate<GoodGuy>();
-        
         unpackedGoodGuy.GlobalPosition = position;
         
         Entities.AddChild(unpackedGoodGuy);
@@ -101,9 +105,7 @@ public partial class TestWorld : Node2D
     {
         GD.Print($"BeachGoer spawned at position: {position}");
 
-        var packedBeachGoer = GD.Load<PackedScene>("res://Scenes/Entities/beach_goer.tscn");
         var unpackedBeachGoer = packedBeachGoer.Instantiate<BeachGoer>();
-
         unpackedBeachGoer.GlobalPosition = position;
 
         Entities.AddChild(unpackedBeachGoer);
@@ -113,11 +115,19 @@ public partial class TestWorld : Node2D
     {
         GD.Print($"Umbrella spawned at position: {position}");
         
-        var packedUmbrella = GD.Load<PackedScene>("res://Scenes/Entities/beach_umbrella.tscn");
         var unpackedUmbrella = packedUmbrella.Instantiate<BeachUmbrella>();
-        
         unpackedUmbrella.GlobalPosition = position;
         
         Entities.AddChild(unpackedUmbrella);
+    }
+
+    private void OnSpawnSandcastle(Vector2 position)
+    {
+        GD.Print($"Sandcastle spawned at position: {position}");
+
+        var unpackedSandcastle = packedSandcastle.Instantiate<Sandcastle>();
+        unpackedSandcastle.GlobalPosition = position;
+
+        Entities.AddChild(unpackedSandcastle);
     }
 }

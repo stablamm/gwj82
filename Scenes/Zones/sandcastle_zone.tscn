@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca56q3ylvfl6j"]
+
+[ext_resource type="Script" uid="uid://d2aabsonrlfy2" path="res://Scenes/Zones/SandcastleZone.cs" id="1_x8d6a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8d6a"]
+size = Vector2(288, 192)
+
+[node name="SandcastleZone" type="Node2D"]
+script = ExtResource("1_x8d6a")
+
+[node name="SpawnArea" type="Area2D" parent="."]
+
+[node name="CollisionArea" type="CollisionShape2D" parent="SpawnArea"]
+shape = SubResource("RectangleShape2D_x8d6a")

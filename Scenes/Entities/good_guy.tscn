@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2goxwym4aowr"]
+
+[ext_resource type="PackedScene" uid="uid://pf82at0362kb" path="res://Scenes/Entities/body_animation.tscn" id="1_aw3yb"]
+[ext_resource type="Script" uid="uid://b1eajv4o7twa8" path="res://Scenes/Entities/GoodGuy.cs" id="1_pwdff"]
+[ext_resource type="Texture2D" uid="uid://dswkagrgxqjql" path="res://Assets/good_guy.png" id="2_pwdff"]
+[ext_resource type="PackedScene" uid="uid://ddel01hq0osjs" path="res://Scenes/Emotes/emote.tscn" id="4_br5kp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aw3yb"]
+radius = 8.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_br5kp"]
+radius = 142.014
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pwdff"]
+radius = 27.0
+
+[node name="GoodGuy" type="CharacterBody2D" groups=["police"]]
+z_index = 1
+slide_on_ceiling = false
+script = ExtResource("1_pwdff")
+Speed = 100.0
+
+[node name="BodyAnimation" parent="." instance=ExtResource("1_aw3yb")]
+SpriteTexture = ExtResource("2_pwdff")
+
+[node name="Emote" parent="." instance=ExtResource("4_br5kp")]
+position = Vector2(0, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_aw3yb")
+
+[node name="ChaseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
+shape = SubResource("CircleShape2D_br5kp")
+
+[node name="ChaseTimer" type="Timer" parent="."]
+
+[node name="ArrestArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArrestArea"]
+shape = SubResource("CircleShape2D_pwdff")
+
+[connection signal="body_entered" from="ChaseArea" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="ChaseArea" to="." method="OnBodyExited"]
+[connection signal="body_entered" from="ArrestArea" to="." method="OnArrestAreaEntered"]

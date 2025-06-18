@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://mjh7t4cvyuqj"]
+
+[ext_resource type="Script" uid="uid://dnvj1vq5rvt8l" path="res://Scenes/Entities/BeachGoer.cs" id="1_s7nv5"]
+[ext_resource type="PackedScene" uid="uid://pf82at0362kb" path="res://Scenes/Entities/body_animation.tscn" id="1_yjouf"]
+[ext_resource type="Texture2D" uid="uid://5es4alo25gd6" path="res://Assets/beach_girl_1.png" id="2_rfg7h"]
+[ext_resource type="Texture2D" uid="uid://b3aji1if0uqwh" path="res://Assets/beach_girl_2.png" id="3_1lvwi"]
+[ext_resource type="Texture2D" uid="uid://bf4agp4oa7c3f" path="res://Assets/beach_guy_1.png" id="4_mi42o"]
+[ext_resource type="Texture2D" uid="uid://oqyfnlgka7ns" path="res://Assets/beach_guy_2.png" id="5_xm3gs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_61ec6"]
+radius = 8.0
+height = 22.0
+
+[node name="BeachGoer" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_s7nv5")
+BeachGoerTextures = [ExtResource("2_rfg7h"), ExtResource("3_1lvwi"), ExtResource("4_mi42o"), ExtResource("5_xm3gs")]
+
+[node name="BodyAnimation" parent="." instance=ExtResource("1_yjouf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_61ec6")
+
+[node name="Wander" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Wander" to="." method="OnWanderTimerTimeout"]

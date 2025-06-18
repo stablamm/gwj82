@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce4vkl5ch4b3k"]
+
+[ext_resource type="Script" uid="uid://b6h1vxrsuksy4" path="res://Scenes/Zones/BeachAreaSpawnZone.cs" id="1_k1rwg"]
+[ext_resource type="PackedScene" uid="uid://ca56q3ylvfl6j" path="res://Scenes/Zones/sandcastle_zone.tscn" id="2_k1rwg"]
+
+[node name="BeachAreaSpawnZone" type="Node2D"]
+script = ExtResource("1_k1rwg")
+
+[node name="SandcastleZone" parent="." instance=ExtResource("2_k1rwg")]
+position = Vector2(179, 135)
+NumberOfSandcastles = 7
+
+[node name="CollisionArea" parent="SandcastleZone/SpawnArea" index="0"]
+position = Vector2(83.5, 70)
+
+[node name="GoodGuySpawnMarker" type="Marker2D" parent="."]
+position = Vector2(263, 195)
+
+[node name="BeachGoer_1" type="Marker2D" parent="."]
+position = Vector2(269, 41)
+
+[node name="BeachGoer_2" type="Marker2D" parent="."]
+position = Vector2(75, 199)
+
+[node name="BeachGoer_3" type="Marker2D" parent="."]
+position = Vector2(342, 346)
+
+[node name="BeachGoer_4" type="Marker2D" parent="."]
+position = Vector2(168, 348)
+
+[node name="UmbrellaSpawn_1" type="Marker2D" parent="."]
+position = Vector2(0, 191)
+
+[node name="UmbrellaSpawn_2" type="Marker2D" parent="."]
+position = Vector2(525, 191)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[editable path="SandcastleZone"]

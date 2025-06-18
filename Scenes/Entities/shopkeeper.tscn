@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://yu3bkj2cubrq"]
+
+[ext_resource type="PackedScene" uid="uid://pf82at0362kb" path="res://Scenes/Entities/body_animation.tscn" id="1_5vw3b"]
+[ext_resource type="Script" uid="uid://b3vmrkcmo4624" path="res://Scenes/Entities/Shopkeeper.cs" id="1_38o2u"]
+[ext_resource type="Texture2D" uid="uid://dpfoc55erck5r" path="res://Assets/shopkeep.png" id="2_38o2u"]
+
+[node name="Shopkeeper" type="Node2D"]
+script = ExtResource("1_38o2u")
+
+[node name="BodyAnimation" parent="." instance=ExtResource("1_5vw3b")]
+SpriteTexture = ExtResource("2_38o2u")

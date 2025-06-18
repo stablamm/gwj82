@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=3 uid="uid://bv8nkvb7l2upi"]
+
+[ext_resource type="Texture2D" uid="uid://cj4hrayvg7rb8" path="res://Assets/Beach_Umbreall_Open_32x32.png" id="1_780fg"]
+[ext_resource type="Script" uid="uid://ps6xlnpro6es" path="res://Scenes/Entities/BeachUmbrella.cs" id="1_rimlo"]
+
+[sub_resource type="Animation" id="Animation_pnh6q"]
+resource_name = "Close"
+length = 0.5
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UmbrellaSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_780fg"]
+resource_name = "Open"
+length = 0.75
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UmbrellaSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00181474, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_rimlo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UmbrellaSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pnh6q"]
+_data = {
+&"Close": SubResource("Animation_pnh6q"),
+&"Open": SubResource("Animation_780fg"),
+&"RESET": SubResource("Animation_rimlo")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rimlo"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnh6q"]
+radius = 46.0
+
+[node name="BeachUmbrella" type="StaticBody2D"]
+z_index = 1
+script = ExtResource("1_rimlo")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+position = Vector2(1, 8)
+texture = ExtResource("1_780fg")
+hframes = 8
+region_enabled = true
+region_rect = Rect2(0, 512, 768, 96)
+
+[node name="UmbrellaSprite" type="Sprite2D" parent="."]
+position = Vector2(1, -42)
+texture = ExtResource("1_780fg")
+hframes = 8
+vframes = 4
+region_enabled = true
+region_rect = Rect2(0, 0, 768, 512)
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pnh6q")
+}
+autoplay = "Close"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_rimlo")
+
+[node name="InteractArea" type="Area2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_pnh6q")
+
+[connection signal="body_entered" from="InteractArea" to="." method="OnInteractAreaEntered"]
+[connection signal="body_exited" from="InteractArea" to="." method="OnInteractAreaExited"]

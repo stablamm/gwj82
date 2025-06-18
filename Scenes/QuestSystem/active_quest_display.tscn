@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://svv0mfols1dx"]
+
+[ext_resource type="Script" uid="uid://mocly2b3kijo" path="res://Scenes/QuestSystem/ActiveQuestDisplay.cs" id="1_av0xu"]
+
+[node name="ActiveQuestDisplay" type="Node2D"]
+script = ExtResource("1_av0xu")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 321.0
+offset_bottom = 105.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugQuestId" type="Label" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="QuestTitle" type="Label" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="QuestProgress" type="Label" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

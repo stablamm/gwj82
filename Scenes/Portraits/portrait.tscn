@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckhsuy8kraivk"]
+
+[ext_resource type="Script" uid="uid://cb40ogt71ojqp" path="res://Scenes/Portraits/Portrait.cs" id="1_beh1d"]
+[ext_resource type="Texture2D" uid="uid://ubojwv34se7n" path="res://Assets/bad_guy_portrait.png" id="1_il756"]
+[ext_resource type="Texture2D" uid="uid://ck06eun2ga2tp" path="res://Assets/Modern_UI_Style_1_32x32.png" id="1_prwbt"]
+
+[sub_resource type="Animation" id="Animation_prwbt"]
+resource_name = "Blink"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HeadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_dcwbt"]
+resource_name = "No"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HeadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+}
+
+[sub_resource type="Animation" id="Animation_beh1d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HeadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_0ux7c"]
+resource_name = "Yes"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HeadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ux7c"]
+_data = {
+&"Blink": SubResource("Animation_prwbt"),
+&"No": SubResource("Animation_dcwbt"),
+&"RESET": SubResource("Animation_beh1d"),
+&"Yes": SubResource("Animation_0ux7c")
+}
+
+[node name="Portrait" type="Node2D"]
+script = ExtResource("1_beh1d")
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0ux7c")
+}
+
+[node name="FrameSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_prwbt")
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 96)
+
+[node name="HeadSprite" type="Sprite2D" parent="."]
+position = Vector2(2, 3)
+texture = ExtResource("1_il756")
+hframes = 10
+vframes = 3

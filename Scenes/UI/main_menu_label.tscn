@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn6ms324dvhjp"]
+
+[ext_resource type="Script" uid="uid://c84lg2hqldrs2" path="res://Scenes/UI/MainMenuLabel.cs" id="1_30lnt"]
+[ext_resource type="Shader" uid="uid://b12m67k3bw5sc" path="res://sandy_text.gdshader" id="1_jjlye"]
+[ext_resource type="FontFile" uid="uid://km5ehx1w6aaw" path="res://Assets/Fonts/PatrickHand-Regular.ttf" id="2_30lnt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30lnt"]
+size = Vector2(216, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0dtf"]
+shader = ExtResource("1_jjlye")
+shader_parameter/sand_color = Vector4(1.12, 1.04, 0.705, 1)
+shader_parameter/groove_color = Vector3(0.3, 0.25, 0.2)
+shader_parameter/groove_depth = 0.8
+shader_parameter/grain_strength = 0.15
+
+[node name="MainMenuLabel" type="Node2D"]
+script = ExtResource("1_30lnt")
+
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(108, 32)
+shape = SubResource("RectangleShape2D_30lnt")
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_a0dtf")
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_30lnt")
+theme_override_font_sizes/font_size = 51
+
+[connection signal="body_entered" from="InteractArea" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="InteractArea" to="." method="OnBodyExited"]

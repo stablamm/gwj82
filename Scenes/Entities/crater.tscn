@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://0p1tn1ms3464"]
+
+[ext_resource type="Texture2D" uid="uid://srl4x13irrj0" path="res://Assets/21_Beach_32x32.png" id="1_au27f"]
+[ext_resource type="Script" uid="uid://15xodilwdm3r" path="res://Scenes/Entities/Crater.cs" id="1_nm7ik"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nm7ik"]
+radius = 16.0
+
+[node name="Crater" type="StaticBody2D"]
+script = ExtResource("1_nm7ik")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(3, -6)
+texture = ExtResource("1_au27f")
+region_enabled = true
+region_rect = Rect2(96, 416, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_nm7ik")

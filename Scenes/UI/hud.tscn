@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dapdbdkb3fgu"]
+
+[sub_resource type="Gradient" id="Gradient_wkk6c"]
+colors = PackedColorArray(0.12549, 0.12549, 1, 1, 0.988235, 0, 0.0235294, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sprlj"]
+gradient = SubResource("Gradient_wkk6c")
+width = 233
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 241.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_sprlj")
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2

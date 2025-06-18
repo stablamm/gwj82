@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjt5le3xxuo65"]
+
+[ext_resource type="Script" uid="uid://hteqcdsdtqsc" path="res://Scenes/Dialogues/DialogueBox.cs" id="1_da1v4"]
+[ext_resource type="Texture2D" uid="uid://ck06eun2ga2tp" path="res://Assets/Modern_UI_Style_1_32x32.png" id="1_ux8c1"]
+
+[sub_resource type="Animation" id="Animation_jgnnv"]
+resource_name = "Default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_da1v4"]
+resource_name = "FadeIn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pcnl8"]
+resource_name = "FadeOut"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wtyqc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pcnl8"]
+_data = {
+&"Default": SubResource("Animation_jgnnv"),
+&"FadeIn": SubResource("Animation_da1v4"),
+&"FadeOut": SubResource("Animation_pcnl8"),
+&"RESET": SubResource("Animation_wtyqc")
+}
+
+[node name="DialogueBox" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
+script = ExtResource("1_da1v4")
+
+[node name="TextBackground" type="NinePatchRect" parent="."]
+offset_right = 168.0
+offset_bottom = 54.0
+texture = ExtResource("1_ux8c1")
+region_rect = Rect2(120, 26, 48, 44)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TextBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="OutputLabel" type="RichTextLabel" parent="TextBackground/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Activate Bully Mode: Press 'E'[/center]"
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pcnl8")
+}
+autoplay = "Default"

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw2nr2gfnf7xb"]
+
+[ext_resource type="Script" uid="uid://dxh4ne3pyjq0s" path="res://Scenes/Entities/BadGuy.cs" id="1_t1m8x"]
+[ext_resource type="PackedScene" uid="uid://pf82at0362kb" path="res://Scenes/Entities/body_animation.tscn" id="2_t1m8x"]
+[ext_resource type="PackedScene" uid="uid://ddel01hq0osjs" path="res://Scenes/Emotes/emote.tscn" id="3_mkpyi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1m8x"]
+radius = 8.0
+
+[node name="BadGuy" type="CharacterBody2D" groups=["player"]]
+z_index = 1
+script = ExtResource("1_t1m8x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_t1m8x")
+
+[node name="BodyAnimation" parent="." instance=ExtResource("2_t1m8x")]
+
+[node name="Emote" parent="." instance=ExtResource("3_mkpyi")]
+position = Vector2(0, -37)
+
+[node name="LeftRay" type="RayCast2D" parent="."]
+target_position = Vector2(-19, 0)
+
+[node name="RightRay" type="RayCast2D" parent="."]
+target_position = Vector2(22, 0)
+
+[node name="DownRay" type="RayCast2D" parent="."]
+target_position = Vector2(0, 19)
+
+[node name="UpRay" type="RayCast2D" parent="."]
+target_position = Vector2(0, -29)
+
+[node name="BullyPowerTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="BullyPowerTimer" to="." method="OnBullyPowerTimeout"]

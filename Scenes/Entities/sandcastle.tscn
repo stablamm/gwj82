@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://o36203mgrm5"]
+
+[ext_resource type="Script" uid="uid://bmk21dxotiqqr" path="res://Scenes/Entities/Sandcastle.cs" id="1_rp5q6"]
+[ext_resource type="Texture2D" uid="uid://srl4x13irrj0" path="res://Assets/21_Beach_32x32.png" id="1_u8jg6"]
+[ext_resource type="Shader" uid="uid://ctuhwjlxiqsbc" path="res://glisten.gdshader" id="2_pi68d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rp5q6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rp5q6"]
+resource_local_to_scene = true
+shader = ExtResource("2_pi68d")
+shader_parameter/glint_enabled = false
+shader_parameter/glint_speed = 1.214
+shader_parameter/glint_width = 0.11
+shader_parameter/glint_intensity = 0.036
+shader_parameter/glint_color = Vector4(1, 1, 1, 1)
+shader_parameter/glint_dir = Vector2(1, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pi68d"]
+
+[node name="Sandcastle" type="StaticBody2D" groups=["sandcastles"]]
+script = ExtResource("1_rp5q6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rp5q6")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rp5q6")
+texture = ExtResource("1_u8jg6")
+hframes = 2
+vframes = 2
+region_enabled = true
+region_rect = Rect2(864, 0, 64, 64)
+
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("RectangleShape2D_pi68d")
+
+[connection signal="mouse_entered" from="InteractArea" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="InteractArea" to="." method="OnMouseExited"]

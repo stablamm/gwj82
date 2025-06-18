@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciwxjo3kor1jh"]
+
+[ext_resource type="Script" uid="uid://clmalqewyqek6" path="res://Scenes/Shops/Shop.cs" id="1_1c135"]
+[ext_resource type="Texture2D" uid="uid://srl4x13irrj0" path="res://Assets/21_Beach_32x32.png" id="1_1i5dq"]
+[ext_resource type="PackedScene" uid="uid://yu3bkj2cubrq" path="res://Scenes/Entities/shopkeeper.tscn" id="2_1c135"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1i5dq"]
+size = Vector2(29.4392, 24.8796)
+
+[node name="Shop" type="StaticBody2D"]
+z_index = 1
+script = ExtResource("1_1c135")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -49)
+texture = ExtResource("1_1i5dq")
+region_enabled = true
+region_rect = Rect2(480, 256, 192, 160)
+metadata/_edit_lock_ = true
+
+[node name="Shopkeeper" parent="." instance=ExtResource("2_1c135")]
+position = Vector2(-3, -2)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -17)
+texture = ExtResource("1_1i5dq")
+region_enabled = true
+region_rect = Rect2(480, 416, 64, 96)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(6, 29, 46, 29, 90, 6, 92, 1, 92, -11, 90, -15, 88, -17, 84, -21, -94, -21, -96, 3, -96, 29)
+
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(3, 37.3601)
+scale = Vector2(1.97016, 0.694539)
+shape = SubResource("RectangleShape2D_1i5dq")
+
+[connection signal="body_entered" from="InteractArea" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="InteractArea" to="." method="OnBodyExited"]

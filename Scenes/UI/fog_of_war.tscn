@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba5xdxlvvsil1"]
+
+[ext_resource type="Shader" uid="uid://b4pt6ttqbv4k3" path="res://fow.gdshader" id="1_a6ddi"]
+[ext_resource type="Script" uid="uid://cpqdmprq1pt8l" path="res://Scenes/UI/FogOfWar.cs" id="2_it38x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fcpkh"]
+shader = ExtResource("1_a6ddi")
+shader_parameter/player_screen_pos = Vector2(50, 50)
+shader_parameter/reveal_radius = 100.0
+shader_parameter/softness = 40.0
+
+[node name="FogOfWar" type="ColorRect"]
+material = SubResource("ShaderMaterial_fcpkh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_it38x")

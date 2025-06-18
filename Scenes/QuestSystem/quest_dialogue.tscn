@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl7tu8ddtlipu"]
+
+[ext_resource type="Script" uid="uid://bd2t1jvc2wpvl" path="res://Scenes/QuestSystem/QuestDialogue.cs" id="1_ln5d6"]
+[ext_resource type="Texture2D" uid="uid://ck06eun2ga2tp" path="res://Assets/Modern_UI_Style_1_32x32.png" id="1_y6os7"]
+
+[node name="QuestDialogue" type="Node2D"]
+script = ExtResource("1_ln5d6")
+
+[node name="Background" type="NinePatchRect" parent="."]
+offset_left = 1.0
+offset_right = 340.0
+offset_bottom = 329.0
+texture = ExtResource("1_y6os7")
+region_rect = Rect2(116, 258, 56, 58)
+patch_margin_left = 10
+patch_margin_top = 14
+patch_margin_right = 10
+patch_margin_bottom = 12
+
+[node name="Panel" type="Panel" parent="Background"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = 328.0
+offset_bottom = 234.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="QuestText" type="RichTextLabel" parent="Background/Panel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Quest Title[/center]
+
+This is the quest text. It's not going to be very complicated because it's a game jam."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 239.0
+offset_right = 326.0
+offset_bottom = 316.0
+
+[node name="AcceptButton" type="Button" parent="Background/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Accept"
+
+[node name="DeclineButton" type="Button" parent="Background/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Decline"
+
+[connection signal="pressed" from="Background/HBoxContainer/AcceptButton" to="." method="OnQuestAccepted"]
+[connection signal="pressed" from="Background/HBoxContainer/DeclineButton" to="." method="OnQuestDeclined"]

@@ -13,8 +13,7 @@ public partial class QuestDialogue : Node2D
     public override void _Ready()
     {
         QuestText = GetNode<RichTextLabel>("%QuestText");
-
-        // Hide by default
+        
         Hide();
 
         SignalManager.Instance.Connect(

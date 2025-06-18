@@ -54,7 +54,6 @@ public partial class BeachGoer : CharacterBody2D
 
         // Fallback if all directions are blocked
         WanderDirection = Vector2.Zero;
-        GD.Print("All directions blocked by sandcastles, stopping wander.");
     }
 
     private bool IsSandcastleAhead(Vector2 direction)

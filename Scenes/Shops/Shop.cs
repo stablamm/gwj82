@@ -1,7 +1,6 @@
 using Godot;
 using GWJ.Autoloads;
 using GWJ.Scenes.Entities;
-using System;
 
 namespace GWJ.Scenes.Shops;
 

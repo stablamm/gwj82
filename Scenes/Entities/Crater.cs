@@ -1,6 +1,3 @@
 using Godot;
-using System;
-
-public partial class Crater : StaticBody2D
-{
-}
+namespace GWJ.Scenes.Entities;
+public partial class Crater : StaticBody2D { }
